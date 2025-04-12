@@ -1,6 +1,7 @@
 # Compiled source #
 ###################
-
+*.o
+*.so
 main
 *.yml
 .vscode
