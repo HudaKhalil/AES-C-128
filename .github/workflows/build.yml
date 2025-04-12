@@ -3,17 +3,25 @@ name: Build and Test AES
 on: [push, pull_request]
 
 jobs:
-  build:
+ build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install build tools
-        run: sudo apt-get install -y make gcc
-
-      - name: Build C shared library
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+      - name: Format Code
+        run: clang-format -style=file -i *.c *.h
+      - name: Check Formatting
+        run: git diff --exit-code
+      - name: Compile C Code
         run: make
-
-      - name: Run tests
-        run: python3 test/test_aes.py
+      - name: Run Unit Tests
+        run: python3 -m unittest test/test_aes.py -v
