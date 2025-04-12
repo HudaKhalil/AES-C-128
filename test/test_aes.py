@@ -3,7 +3,6 @@ from ctypes import c_char_p, create_string_buffer
 from ctypes import string_at
 import os
 import sys
-
 # Add the AES Python submodule to the path
 sys.path.append('./python-aes')
 
