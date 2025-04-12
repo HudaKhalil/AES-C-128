@@ -1,5 +1,5 @@
 /*
- * TODO: Add your name and student number here, along with
+ *       Huda Ibrahim, D24126339 along with
  *       a brief description of this code.
  * Name: Huda Ibrahim, StudentID: D24126339
  * Code Breif Description: 
@@ -46,7 +46,7 @@ void sub_bytes(unsigned char *block) {
 void shift_rows(unsigned char *block) {
   unsigned char temp;
   //Leaves Row 0 unchanged
-  
+
   // Row 1: Shift left by 1 
   temp = block[1];
   block[1] = block[5];

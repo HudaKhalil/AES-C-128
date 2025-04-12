@@ -3,6 +3,6 @@
 *.o
 *.so
 main
-*.yml
+
 *.vscode
 */.github
