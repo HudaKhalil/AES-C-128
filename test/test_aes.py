@@ -4,7 +4,7 @@ from ctypes import string_at
 import os
 import sys
 # Add the AES Python submodule to the path
-sys.path.append('./python-aes')
+sys.path.append('../python-aes')
 
 # Import the AES implementation from the submodule
 import aes
