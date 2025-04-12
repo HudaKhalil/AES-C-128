@@ -19,9 +19,9 @@ jobs:
           sudo apt-get install -y clang-format
       - name: Format Code
         run: clang-format -style=file -i *.c *.h
-     # - name: Check Formatting
-      #  run: git diff --exit-code
+  
       - name: Compile C Code
         run: make
-      # - name: Run Unit Tests
-      #  run: python3 -m unittest test/test_aes.py -v
+
+      - name: Run Unit Tests
+        run: python3 -m unittest test
