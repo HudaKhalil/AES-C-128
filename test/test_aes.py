@@ -6,7 +6,7 @@ import sys
 # Add the AES Python submodule to the path
 sys.path.append('./python-aes')
 
-
+import aes
 # Load the compiled shared C library
 lib = ctypes.CDLL('./rijndael.so')
 
