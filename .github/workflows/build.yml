@@ -24,4 +24,4 @@ jobs:
         run: make
 
       - name: Run Unit Tests
-        run: python3 -m unittest test
+        run: python3 -m unittest discover test -p "test_*.py"

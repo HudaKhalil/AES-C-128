@@ -3,6 +3,6 @@
 *.o
 *.so
 main
-
+*/test/__pycache__
 *.vscode
 */.github
