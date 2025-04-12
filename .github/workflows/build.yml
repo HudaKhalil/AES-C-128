@@ -12,7 +12,7 @@ jobs:
           submodules: recursive # python-aes is a submodule
 
       - name: List python-aes directory
-        run: ls -R /AES-C-128/python-aes
+        run: ls -R python-aes
 
       - name: Install build tools
         run: sudo apt-get install -y make gcc
