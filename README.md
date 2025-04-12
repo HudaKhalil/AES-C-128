@@ -1,5 +1,5 @@
 # Advanced Encryption Standard (AES), known as Rijndael
-AES is a symmetric encryption algorithm and a block cipher. The former means that it uses the same key to encrypt and decrypt data. The sender and the receiver must both know -- and use -- the same secret encryption key.
+AES is a symmetric encryption algorithm and a block cipher. The former means that it uses the same key to encrypt and decrypt data. The sender and the receiver must both know and use the same secret encryption key.
 
 ## How AES encryption works
 ### AES includes three block ciphers or cryptographic keys, to encrypt and decrypt message blocks:

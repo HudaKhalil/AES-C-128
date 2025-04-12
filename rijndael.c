@@ -2,7 +2,9 @@
  *       Huda Ibrahim, D24126339 along with
  *       a brief description of this code.
  * Name: Huda Ibrahim, StudentID: D24126339
- * Code Breif Description: 
+ * AES is a symmetric encryption algorithm and a block cipher. 
+ * The former means that it uses the same key to encrypt and decrypt data. 
+ * The sender and the receiver must both know and use the same secret encryption key.
  * This code snippet provides a skeleton implementation of the Advanced Encryption Standard (AES) 
  * algorithm, specifically for encrypting and decrypting single blocks of data 128 bits block size.
  */
