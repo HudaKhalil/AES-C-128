@@ -10,7 +10,7 @@
  */
 
 #include <stdlib.h>
-// TODO: Any other files you need to include should go here
+//Any other files you need to include should go here
 #include <string.h> // For memcpy
 #include "rijndael.h"
 
