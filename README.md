@@ -24,7 +24,7 @@ In this project I am going to demonstrate **128-bit block size** only as per ass
 7) Implementing AES Decryption.
 8) Create unit test that will test the entire encryption and decryption process.
 
-## High-Level AES Flow:
+## AES Encryption Flow:
 
 1) Initial AddRoundKey (round 0)
 
@@ -45,3 +45,27 @@ In this project I am going to demonstrate **128-bit block size** only as per ass
     - shift_rows
 
     - add_round_key (no mix_columns)
+
+## AES Decryption Flow
+
+    AES decryption is the inverse of encryption, 10 rounds, but in reverse:
+
+1) Initial add_round_key with round key 10
+
+2) Second 9 rounds of:
+
+    - invert_shift_rows
+
+    - invert_sub_bytes
+
+    - add_round_key
+
+    - invert_mix_columns
+
+3) Final round:
+
+    - invert_shift_rows
+
+    - invert_sub_bytes
+
+    - add_round_key with round key 0
