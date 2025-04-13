@@ -23,3 +23,25 @@ In this project I am going to demonstrate **128-bit block size** only as per ass
 6) Implementing AES Encryption.
 7) Implementing AES Decryption.
 8) Create unit test that will test the entire encryption and decryption process.
+
+## High-Level AES Flow AES-128 does:
+
+1) Initial AddRoundKey (round 0)
+
+2) Rounds 1–9:
+
+  - sub_bytes
+
+  - shift_rows
+
+  - mix_columns
+
+  - add_round_key
+
+3) Final Round (10):
+
+  - sub_bytes
+
+  - shift_rows
+
+  - add_round_key (no mix_columns)
