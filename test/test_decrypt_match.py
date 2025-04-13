@@ -15,6 +15,7 @@ rijndael.aes_decrypt_block.restype = ctypes.POINTER(ctypes.c_ubyte)
 
 class TestCDecryptAgainstPythonAES(unittest.TestCase):
     def test_decrypt_3_random_cases(self):
+        # unit test to generate at least 3 random inputs, provide Python function
         for i in range(3):
             with self.subTest(round=i + 1):
                 # Generate random key and plaintext
