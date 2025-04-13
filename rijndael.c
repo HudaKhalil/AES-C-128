@@ -218,32 +218,32 @@ unsigned char *expand_key(unsigned char *cipher_key)
 unsigned char *aes_encrypt_block(unsigned char *plaintext, unsigned char *key)
 {
   // Step 1: Expand the key
-  unsigned char *round_keys = expand_key(key);
+    unsigned char *round_keys = expand_key(key);
 
-  // Step 2: Allocate and copy plaintext to block
-  unsigned char *block = (unsigned char *)malloc(BLOCK_SIZE);
-  memcpy(block, plaintext, BLOCK_SIZE);
+    // Step 2: Allocate and copy plaintext to block
+    unsigned char *block = (unsigned char *)malloc(BLOCK_SIZE);
+    memcpy(block, plaintext, BLOCK_SIZE);
 
-  // Step 3: Initial round key addition
-  add_round_key(block, &round_keys[0]);
+    // Step 3: Initial round key addition
+    add_round_key(block, &round_keys[0]);
 
-  // Step 4: Rounds 1–9
-  for (int round = 1; round <= 9; round++) {
-      sub_bytes(block);
-      shift_rows(block);
-      mix_columns(block);
-      add_round_key(block, &round_keys[round * 16]);
-  }
+    // Step 4: Rounds 1–9
+    for (int round = 1; round <= 9; round++) {
+        sub_bytes(block);
+        shift_rows(block);
+        mix_columns(block);
+        add_round_key(block, &round_keys[round * 16]);
+    }
 
-  // Step 5: Final round (no mix_columns)
-  sub_bytes(block);
-  shift_rows(block);
-  add_round_key(block, &round_keys[160]); // 10th round = 16 * 10
+    // Step 5: Final round (no mix_columns)
+    sub_bytes(block);
+    shift_rows(block);
+    add_round_key(block, &round_keys[160]); // 10th round = 16 * 10
 
-  // Step 6: Cleanup
-  free(round_keys);
+    // Step 6: Cleanup
+    free(round_keys);
 
-  return block;
+    return block;
 }
 
 unsigned char *aes_decrypt_block(unsigned char *ciphertext,
