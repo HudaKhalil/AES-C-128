@@ -85,7 +85,7 @@ unsigned char gmul(unsigned char a, unsigned char b)
     unsigned char hi_bit_set = a & 0x80;
     a <<= 1;
     if (hi_bit_set)
-      a ^= 0x1b; // Rijndael's finite field
+      a ^= 0x1b; // Rijndael's finite field: modulo x^8 + x^4 + x^3 + x + 1
     b >>= 1;
   }
   return p;
@@ -172,7 +172,20 @@ void invert_shift_rows(unsigned char *block)
 
 void invert_mix_columns(unsigned char *block)
 {
-  // TODO: Implement me!
+  for (int c = 0; c < 4; c++)
+  {
+    int col = c * 4;
+
+    unsigned char a0 = block[col];
+    unsigned char a1 = block[col + 1];
+    unsigned char a2 = block[col + 2];
+    unsigned char a3 = block[col + 3];
+
+    block[col + 0] = gmul(a0, 0x0e) ^ gmul(a1, 0x0b) ^ gmul(a2, 0x0d) ^ gmul(a3, 0x09);
+    block[col + 1] = gmul(a0, 0x09) ^ gmul(a1, 0x0e) ^ gmul(a2, 0x0b) ^ gmul(a3, 0x0d);
+    block[col + 2] = gmul(a0, 0x0d) ^ gmul(a1, 0x09) ^ gmul(a2, 0x0e) ^ gmul(a3, 0x0b);
+    block[col + 3] = gmul(a0, 0x0b) ^ gmul(a1, 0x0d) ^ gmul(a2, 0x09) ^ gmul(a3, 0x0e);
+  }
 }
 
 /*

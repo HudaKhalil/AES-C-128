@@ -6,3 +6,4 @@ main
 */test/__pycache__
 *.vscode
 */.github
+*.pyc
