@@ -15,7 +15,6 @@ class TestInvertSubBytes(unittest.TestCase):
             0xb7, 0xfd, 0x93, 0x26,
             0x04, 0xc7, 0x23, 0xc3
         ]
-
         # Expected result is the original plaintext before sub_bytes
         expected_original = [
             0x00, 0x01, 0x02, 0x03,
