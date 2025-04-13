@@ -134,16 +134,17 @@ void invert_mix_columns(unsigned char *block)
 /*
  * This operation is shared between encryption and decryption
  * It XORs each byte of the current state (your 16-byte block) with the corresponding byte of the round key.
-* It used at:
-* The start (initial round)
-* After every round (sub_bytes → shift_rows → mix_columns → add_round_key)
-* The final round (without mix_columns)
+ * It used at:
+ * The start (initial round)
+ * After every round (sub_bytes → shift_rows → mix_columns → add_round_key)
+ * The final round (without mix_columns)
  */
 void add_round_key(unsigned char *block, unsigned char *round_key)
 {
-  for (int i = 0; i < BLOCK_SIZE; i++) {
+  for (int i = 0; i < BLOCK_SIZE; i++)
+  {
     block[i] ^= round_key[i];
- }
+  }
 }
 
 /*
@@ -151,10 +152,63 @@ void add_round_key(unsigned char *block, unsigned char *round_key)
  * which is a single 128-bit key, it should return a 176-byte
  * vector, containing the 11 round keys one after the other
  */
+
+static const unsigned char rcon[11] = {
+    0x00, 0x01, 0x02, 0x04, 0x08,
+    0x10, 0x20, 0x40, 0x80, 0x1B, 0x36};
+
+// Helper functions for Step expand_key:
+static void sub_word(unsigned char *word)
+{
+  for (int i = 0; i < 4; i++)
+  {
+    word[i] = s_box[word[i]];
+  }
+}
+
+static void rot_word(unsigned char *word)
+{
+  unsigned char tmp = word[0];
+  word[0] = word[1];
+  word[1] = word[2];
+  word[2] = word[3];
+  word[3] = tmp;
+}
+
 unsigned char *expand_key(unsigned char *cipher_key)
 {
-  // TODO: Implement me!
-  return 0;
+  int i = 0;
+  unsigned char temp[4];
+  unsigned char *expanded_key = malloc(176); // 11 * 16 bytes
+
+  // Step 1: Copy original key
+  for (i = 0; i < 16; i++) {
+      expanded_key[i] = cipher_key[i];
+  }
+
+  int bytes_generated = 16;
+  int rcon_iteration = 1;
+
+  while (bytes_generated < 176) {
+      // Copy last 4 bytes into temp
+      for (i = 0; i < 4; i++) {
+          temp[i] = expanded_key[bytes_generated - 4 + i];
+      }
+
+      if (bytes_generated % 16 == 0) {
+          rot_word(temp);
+          sub_word(temp);
+          temp[0] ^= rcon[rcon_iteration++];
+      }
+
+      for (i = 0; i < 4; i++) {
+          expanded_key[bytes_generated] =
+              expanded_key[bytes_generated - 16] ^ temp[i];
+          bytes_generated++;
+      }
+  }
+
+  return expanded_key;
 }
 
 /*
