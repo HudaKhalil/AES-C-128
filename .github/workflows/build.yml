@@ -6,22 +6,19 @@ jobs:
  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang-format
-      - name: Format Code
-        run: clang-format -style=file -i *.c *.h
-  
-      - name: Compile C Code
-        run: make
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Run Unit Tests
-        run: python3 -m unittest discover test -p "test_*.py"
+    - name: Install build tools
+      run: sudo apt update && sudo apt install -y build-essential python3 python3-pip
+
+    - name: Compile C code
+      run: make
+
+    - name: Install Python dependencies
+      run: |
+        pip3 install --upgrade pip
+        pip3 install pycryptodome
+
+    - name: Run Unit Tests
+      run: python3 -m unittest discover test -p "test_*.py"
