@@ -69,3 +69,23 @@ In this project I am going to demonstrate **128-bit block size** only as per ass
     - invert_sub_bytes
 
     - add_round_key with round key 0
+
+## AES Stage-by-Stage Validation
+
+| Stage            | C Function            | Verified By               |
+|------------------|------------------------|--------------------------|
+| Sub Bytes        | `sub_bytes()`          | `test_sub_bytes.py`      |
+| Shift Rows       | `shift_rows()`         | `test_shift_rows.py`     |
+| Mix Columns      | `mix_columns()`        | `test_mix_columns.py`    |
+| Add Round Key    | `add_round_key()`      | `test_add_round_key.py`  |
+| Key Expansion    | `expand_key()`         | `test_expand_key.py`     |
+| Encrypt Block    | `aes_encrypt_block()`  | `test_encrypt_match.py`  |
+| Decrypt Block    | `aes_decrypt_block()`  | `test_decrypt_match.py`  |
+
+## CI Integration
+
+All of the above tests are automatically run via GitHub Actions on each commit:
+
+```yaml
+- name: Run Unit Tests
+  run: python3 -m unittest discover test -p "test_*.py"
