@@ -133,10 +133,17 @@ void invert_mix_columns(unsigned char *block)
 
 /*
  * This operation is shared between encryption and decryption
+ * It XORs each byte of the current state (your 16-byte block) with the corresponding byte of the round key.
+* It used at:
+* The start (initial round)
+* After every round (sub_bytes → shift_rows → mix_columns → add_round_key)
+* The final round (without mix_columns)
  */
 void add_round_key(unsigned char *block, unsigned char *round_key)
 {
-  // TODO: Implement me!
+  for (int i = 0; i < BLOCK_SIZE; i++) {
+    block[i] ^= round_key[i];
+ }
 }
 
 /*
