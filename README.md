@@ -30,18 +30,18 @@ In this project I am going to demonstrate **128-bit block size** only as per ass
 
 2) Rounds 1–9:
 
-  - sub_bytes
+    - sub_bytes
 
-  - shift_rows
+    - shift_rows
 
-  - mix_columns
+    - mix_columns
 
-  - add_round_key
+    - add_round_key
 
 3) Final Round (10):
 
-  - sub_bytes
+    - sub_bytes
 
-  - shift_rows
+    - shift_rows
 
-  - add_round_key (no mix_columns)
+    - add_round_key (no mix_columns)
